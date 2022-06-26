@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+          
+            background-color: rgb(136, 97, 45);
+            padding: 20px;
+            width:300px;
+            height: 400px;
+            text-align: center;
+            margin:auto;
+        }
+        .box{
+          width:250px;
+          height: 30px;
+          border:none;
+          border-radius: 5px;
+          text-align: center;
+        }
+
+        #add{
+            background-color: rgb(192, 45, 45);
+            color:white;
+            font-size: 20px;
+            /* text-align: center; */
+        }
+        p{
+            margin-top:-10px;
+            background-color: rgb(158, 59, 59);
+            color:rgb(211, 214, 35);
+            padding: 10px;
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form id="sellerForm">
+            <p>Admin Panel Dashboard</p>
+            <input type="text" id="name" class="box" placeholder="Enter Product Name"><br><br>
+            <input type="text" id="category" class="box"  placeholder="Category"><br><br>
+            <input type="text" id="image" class="box"  placeholder="Enter Product URL"><br><br>
+            <input type="number" id="price" class="box"  placeholder="Pirce"><br><br>
+            <select name="" id="gender" class="box" >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select><br><br>
+            <input type="checkbox" id="sold">SOLD<br><br>
+            <input type="submit" id="add" class="box" >
+
+        </form>
+    </div>
+</body>
+</html>
+
+<script>
+    document
+.querySelector("#sellerForm")
+.addEventListener("submit",subFun);
+
+let sellerArr=JSON.parse(localStorage.getItem("Products"))||[];
+
+function Product(name,category,image,price,gender,sold) {
+    this.name=name;
+    this.category=category;
+    this.image=image;
+    this.price=price;
+    this.gender=gender;
+    this.sold=sold;
+}
+
+
+function subFun(event) {
+    event.preventDefault();
+    let name=sellerForm.name.value;
+    let category=sellerForm.category.value;
+    let image=sellerForm.image.value;
+    let price=sellerForm.price.value;
+    let gender=sellerForm.gender.value;
+    let sold=sellerForm.sold.value;
+let sellerObj= new Product(name,category,image,price,gender,sold);
+sellerArr.push(sellerObj);
+localStorage.setItem("Products",JSON.stringify(sellerArr));
+}
+</script>
